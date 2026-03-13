@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flavio Rivainera — Habilidades Tecnológicas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --negro: #0a0a0a;
+      --dorado: #c9a84c;
+      --dorado-claro: #f0d080;
+      --dorado-oscuro: #8a6a1c;
+      --blanco: #f5f5f0;
+      --gris: #111111;
+      --gris2: #1a1a1a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--negro);
+      color: var(--blanco);
+      font-family: 'Raleway', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: radial-gradient(ellipse at center, #1a1200 0%, #0a0a0a 70%);
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(201,168,76,0.03) 2px, rgba(201,168,76,0.03) 4px
+      );
+      pointer-events: none;
+    }
+
+    .tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: var(--dorado);
+      opacity: 0.8;
+      margin-bottom: 16px;
+      animation: fadeIn 1s ease;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(50px, 10vw, 100px);
+      letter-spacing: 6px;
+      color: var(--dorado);
+      text-shadow: 0 0 40px rgba(201,168,76,0.3);
+      line-height: 1;
+      animation: fadeInDown 1s ease;
+    }
+
+    .hero h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(30px, 6vw, 60px);
+      letter-spacing: 6px;
+      color: var(--blanco);
+      opacity: 0.9;
+      animation: fadeInDown 1s ease 0.1s both;
+    }
+
+    .linea-dorada {
+      width: 80px; height: 2px;
+      background: var(--dorado);
+      margin: 20px auto;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(245,245,240,0.5);
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    /* NAVEGACION */
+    nav {
+      background: var(--gris2);
+      border-top: 1px solid rgba(201,168,76,0.2);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 14px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: rgba(245,245,240,0.6);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin: 0 14px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: var(--dorado); }
+
+    /* SECCION */
+    .seccion {
+      padding: 70px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .seccion-alt {
+      background: var(--gris);
+      padding: 70px 20px;
+    }
+
+    .seccion-alt .seccion-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .seccion-titulo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      letter-spacing: 6px;
+      color: var(--dorado);
+      margin-bottom: 8px;
+    }
+
+    .seccion-desc {
+      font-size: 14px;
+      color: rgba(245,245,240,0.5);
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+    }
+
+    /* GRID DE HABILIDADES */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .skill-card {
+      background: var(--gris2);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      padding: 28px 24px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--dorado);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .skill-card:hover::after { transform: scaleX(1); }
+    .skill-card:hover {
+      border-color: rgba(201,168,76,0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(201,168,76,0.1);
+    }
+
+    .skill-icono { font-size: 32px; margin-bottom: 14px; }
+
+    .skill-nombre {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--dorado);
+      margin-bottom: 6px;
+    }
+
+    .skill-nivel {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: rgba(201,168,76,0.6);
+      margin-bottom: 12px;
+    }
+
+    .skill-desc {
+      font-size: 13px;
+      color: rgba(245,245,240,0.6);
+      line-height: 1.7;
+    }
+
+    .skill-tags {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-item {
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: rgba(201,168,76,0.7);
+      border-radius: 2px;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    /* BARRA DE PROGRESO */
+    .barra-container {
+      margin-top: 12px;
+    }
+
+    .barra-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: rgba(245,245,240,0.4);
+      margin-bottom: 5px;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .barra {
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .barra-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--dorado-oscuro), var(--dorado));
+      border-radius: 2px;
+      animation: llenar 1.5s ease forwards;
+    }
+
+    @keyframes llenar {
+      from { width: 0; }
+    }
+
+    /* PROYECTOS */
+    .proyectos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .proyecto-card {
+      background: var(--negro);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .proyecto-card:hover {
+      border-color: var(--dorado);
+      box-shadow: 0 0 20px rgba(201,168,76,0.1);
+    }
+
+    .proyecto-titulo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: var(--dorado);
+      margin-bottom: 8px;
+    }
+
+    .proyecto-desc {
+      font-size: 13px;
+      color: rgba(245,245,240,0.6);
+      line-height: 1.7;
+    }
+
+    /* LINKS */
+    .links-section {
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .botones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border: 1px solid var(--dorado);
+      color: var(--dorado);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .btn:hover {
+      background: var(--dorado);
+      color: var(--negro);
+    }
+
+    .btn-primary {
+      background: var(--dorado);
+      color: var(--negro);
+    }
+
+    .btn-primary:hover {
+      background: var(--dorado-claro);
+      box-shadow: 0 0 20px rgba(201,168,76,0.4);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: rgba(245,245,240,0.3);
+    }
+
+    footer span { color: var(--dorado); }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="tag">// PERFIL TECNOLÓGICO</p>
+    <h1>FLAVIO</h1>
+    <h2>RIVAINERA</h2>
+    <div class="linea-dorada"></div>
+    <p class="hero-sub">Tecnología · Automatización · Producción Digital</p>
+    <p class="hero-sub" style="margin-top:8px; font-size:11px;">Rafaela, Santa Fe · Argentina</p>
+  </section>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#habilidades">Habilidades</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#links">Contacto</a>
+  </nav>
+
+  <!-- HABILIDADES -->
+  <section id="habilidades" class="seccion">
+    <h2 class="seccion-titulo">Habilidades</h2>
+    <p class="seccion-desc">// TECNOLOGÍAS Y HERRAMIENTAS</p>
+
+    <div class="grid">
+
+      <div class="skill-card">
+        <div class="skill-icono">🐳</div>
+        <div class="skill-nombre">Docker</div>
+        <div class="skill-nivel">// NIVEL INTERMEDIO</div>
+        <div class="skill-desc">Contenedores, imágenes, Docker Hub. Kali Linux, N8N y Apache corriendo en Docker.</div>
+        <div class="barra-container">
+          <div class="barra-label">PROGRESO</div>
+          <div class="barra"><div class="barra-fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag-item">Contenedores</span>
+          <span class="tag-item">Kali Linux</span>
+          <span class="tag-item">Apache</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icono">🔐</div>
+        <div class="skill-nombre">Ciberseguridad</div>
+        <div class="skill-nivel">// NIVEL BÁSICO-INTERMEDIO</div>
+        <div class="skill-desc">Nmap, Wireshark, UFW, VPN, Kali Linux, Metasploit. 12 lecciones completadas.</div>
+        <div class="barra-container">
+          <div class="barra-label">PROGRESO</div>
+          <div class="barra"><div class="barra-fill" style="width:55%"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag-item">Nmap</span>
+          <span class="tag-item">Wireshark</span>
+          <span class="tag-item">Kali</span>
+          <span class="tag-item">UFW</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icono">🐍</div>
+        <div class="skill-nombre">Python</div>
+        <div class="skill-nivel">// NIVEL BÁSICO</div>
+        <div class="skill-desc">Scripts para WiFi, conversión de imágenes a STL 3D y automatización.</div>
+        <div class="barra-container">
+          <div class="barra-label">PROGRESO</div>
+          <div class="barra"><div class="barra-fill" style="width:40%"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag-item">Scripts</span>
+          <span class="tag-item">3D STL</span>
+          <span class="tag-item">WiFi</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icono">🤖</div>
+        <div class="skill-nombre">N8N</div>
+        <div class="skill-nivel">// NIVEL BÁSICO</div>
+        <div class="skill-desc">Automatización visual. Workflows, triggers y nodos en JavaScript.</div>
+        <div class="barra-container">
+          <div class="barra-label">PROGRESO</div>
+          <div class="barra"><div class="barra-fill" style="width:30%"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag-item">Workflows</span>
+          <span class="tag-item">JavaScript</span>
+          <span class="tag-item">Docker</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icono">🌐</div>
+        <div class="skill-nombre">Desarrollo Web</div>
+        <div class="skill-nivel">// NIVEL BÁSICO</div>
+        <div class="skill-desc">HTML y CSS. Páginas web publicadas en GitHub Pages con servidor Apache.</div>
+        <div class="barra-container">
+          <div class="barra-label">PROGRESO</div>
+          <div class="barra"><div class="barra-fill" style="width:35%"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag-item">HTML</span>
+          <span class="tag-item">CSS</span>
+          <span class="tag-item">GitHub Pages</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icono">🎨</div>
+        <div class="skill-nombre">GIMP</div>
+        <div class="skill-nivel">// NIVEL BÁSICO-INTERMEDIO</div>
+        <div class="skill-desc">Edición de imágenes, diseño gráfico y conversión de imágenes a modelos 3D STL.</div>
+        <div class="barra-container">
+          <div class="barra-label">PROGRESO</div>
+          <div class="barra"><div class="barra-fill" style="width:45%"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag-item">Edición</span>
+          <span class="tag-item">Diseño</span>
+          <span class="tag-item">3D</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icono">🎬</div>
+        <div class="skill-nombre">Kdenlive</div>
+        <div class="skill-nivel">// NIVEL BÁSICO</div>
+        <div class="skill-desc">Edición de video en Linux. Cortes, efectos y exportación de proyectos.</div>
+        <div class="barra-container">
+          <div class="barra-label">PROGRESO</div>
+          <div class="barra"><div class="barra-fill" style="width:35%"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag-item">Edición Video</span>
+          <span class="tag-item">Linux</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icono">🎵</div>
+        <div class="skill-nombre">Ardour</div>
+        <div class="skill-nivel">// NIVEL INTERMEDIO</div>
+        <div class="skill-desc">DAW profesional en Linux para grabación, mezcla y producción musical.</div>
+        <div class="barra-container">
+          <div class="barra-label">PROGRESO</div>
+          <div class="barra"><div class="barra-fill" style="width:55%"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag-item">DAW</span>
+          <span class="tag-item">Grabación</span>
+          <span class="tag-item">Mezcla</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icono">🐧</div>
+        <div class="skill-nombre">Linux</div>
+        <div class="skill-nivel">// NIVEL INTERMEDIO</div>
+        <div class="skill-desc">Debian Trixie. Terminal, bash, apt, scripts y administración del sistema.</div>
+        <div class="barra-container">
+          <div class="barra-label">PROGRESO</div>
+          <div class="barra"><div class="barra-fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag-item">Debian</span>
+          <span class="tag-item">Terminal</span>
+          <span class="tag-item">Bash</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos" class="seccion-alt">
+    <div class="seccion-inner">
+      <h2 class="seccion-titulo">Proyectos</h2>
+      <p class="seccion-desc">// LO QUE CONSTRUÍ</p>
+      <div class="proyectos-grid">
+
+        <div class="proyecto-card">
+          <div class="proyecto-titulo">🌐 Página Web Personal</div>
+          <div class="proyecto-desc">Página web de músico publicada en GitHub Pages con HTML y CSS. Incluye CV descargable en PDF.</div>
+          <div class="skill-tags" style="margin-top:12px">
+            <span class="tag-item">HTML</span>
+            <span class="tag-item">CSS</span>
+            <span class="tag-item">GitHub Pages</span>
+          </div>
+        </div>
+
+        <div class="proyecto-card">
+          <div class="proyecto-titulo">🐳 Servidor Local con Docker</div>
+          <div class="proyecto-desc">Kali Linux, Apache y N8N corriendo simultáneamente en contenedores Docker sobre Debian.</div>
+          <div class="skill-tags" style="margin-top:12px">
+            <span class="tag-item">Docker</span>
+            <span class="tag-item">Apache</span>
+            <span class="tag-item">Kali</span>
+          </div>
+        </div>
+
+        <div class="proyecto-card">
+          <div class="proyecto-titulo">🎵 Imagen a Modelo 3D</div>
+          <div class="proyecto-desc">Script Python que convierte imágenes PNG/JPG a archivos STL para impresión 3D usando GIMP y numpy.</div>
+          <div class="skill-tags" style="margin-top:12px">
+            <span class="tag-item">Python</span>
+            <span class="tag-item">GIMP</span>
+            <span class="tag-item">3D STL</span>
+          </div>
+        </div>
+
+        <div class="proyecto-card">
+          <div class="proyecto-titulo">🤖 Automatización N8N</div>
+          <div class="proyecto-desc">Primer workflow en N8N con trigger manual y nodo de código JavaScript. Base para automatizaciones futuras.</div>
+          <div class="skill-tags" style="margin-top:12px">
+            <span class="tag-item">N8N</span>
+            <span class="tag-item">JavaScript</span>
+            <span class="tag-item">Docker</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <section id="links" class="links-section">
+    <h2 class="seccion-titulo">Contacto</h2>
+    <div class="linea-dorada"></div>
+    <p style="color: rgba(245,245,240,0.5); font-size:13px; letter-spacing:2px; margin-top:10px;">// ENCONTRAME EN</p>
+    <div class="botones">
+      <a href="https://flavioviru-579.github.io" target="_blank" class="btn btn-primary">🌐 Mi Página Web</a>
+      <a href="https://www.linkedin.com/in/flavio-rivainera-0727a8154/" target="_blank" class="btn">💼 LinkedIn</a>
+      <a href="https://www.facebook.com/flavio.rivainera/" target="_blank" class="btn">📘 Facebook</a>
+      <a href="https://www.youtube.com/@flavioemanuelrivainera9389" target="_blank" class="btn">▶️ YouTube</a>
+      <a href="CV_Flavio_Rivainera_Musico.pdf" download class="btn">⬇ Descargar CV</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 <span>Flavio Rivainera</span> · Rafaela, Santa Fe · Argentina</p>
+  </footer>
+
+</body>
+</html>
